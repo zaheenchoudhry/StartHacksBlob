@@ -38,6 +38,7 @@ public class Blob extends Group {
         }
     }
 
+
     public void dispose() {
         pixmap.dispose();
         texture.dispose();

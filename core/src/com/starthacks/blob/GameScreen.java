@@ -10,6 +10,8 @@ public class GameScreen extends AbstractScreen {
     private int lastDownPointer;
     private boolean playerIsJumping, isPlayerDead;
     private float playerMoveDirection; // -1 (left), 0 (stay), 1 (right)
+    private float playerYSpeed;
+    private float GRAVITY;
 
     public GameScreen(final MainActivity game) {
         super(game);
@@ -38,7 +40,11 @@ public class GameScreen extends AbstractScreen {
         // jump
         if (touches.get(pointer).touchX <= SCREEN_WIDTH * 0.30f) {
             playerIsJumping = true;
+            playerYSpeed = 5f*UNIT_Y;
+            GRAVITY = 0.5f*UNIT_Y;
         }
+
+
 
         // move
         if (touches.get(pointer).touchX >= SCREEN_WIDTH * 0.85f) {
@@ -100,13 +106,22 @@ public class GameScreen extends AbstractScreen {
         return false;
     }
 
+
+
     @Override
     public void update() {
         // update values like position size etc
         if (!isPlayerDead) {
             player.update(playerMoveDirection);
+
+            if (playerIsJumping) {
+                player.setY(player.getY()+playerYSpeed);
+                playerYSpeed -= GRAVITY;
+                GRAVITY -= 0.05;
+            }
         }
     }
+
 
     @Override
     public void render(float delta) {
