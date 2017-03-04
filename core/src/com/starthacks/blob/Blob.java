@@ -7,14 +7,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class Blob extends Group {
 
-    private Image blob;
     private float unitX, unitY;
+    private float moveSpeedX;
+    private Image blob;
     private Pixmap pixmap;
     private Texture texture;
 
     public Blob(float unitX, float unitY) {
         this.unitX = unitX;
         this.unitY = unitY;
+        this.moveSpeedX = unitX * 0.5f;
 
         pixmap = new Pixmap((int)(unitX * 10f), (int)(unitX * 10f), Pixmap.Format.RGBA8888);
         pixmap.setColor(0, 0, 0, 1.0f);
@@ -23,13 +25,13 @@ public class Blob extends Group {
 
         blob = new Image(texture);
         blob.setSize(unitX * 10f, unitX * 10f);
-        blob.setPosition(unitX * 50f, unitY * 50f);
+        blob.setPosition(0, 0);
 
         this.addActor(blob);
     }
 
-    public void update() {
-
+    public void update(float moveDirection) {
+        this.setX(this.getX() + moveSpeedX * moveDirection);
     }
 
     public void dispose() {
