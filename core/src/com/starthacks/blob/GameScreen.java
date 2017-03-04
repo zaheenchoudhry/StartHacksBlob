@@ -17,7 +17,7 @@ public class GameScreen extends AbstractScreen {
         isPlayerDead = false;
 
         player = new Blob(UNIT_X, UNIT_Y);
-        player.setPosition(UNIT_X * 50f, UNIT_Y * 50f);
+        player.setPosition(UNIT_X * 50f, 10);
 
         this.addActor(player);
     }

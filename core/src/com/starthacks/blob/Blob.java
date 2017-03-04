@@ -9,6 +9,7 @@ public class Blob extends Group {
 
     private float unitX, unitY;
     private float moveSpeedX;
+    private float currentBlobSize;
     private Image blob;
     private Pixmap pixmap;
     private Texture texture;
@@ -16,22 +17,25 @@ public class Blob extends Group {
     public Blob(float unitX, float unitY) {
         this.unitX = unitX;
         this.unitY = unitY;
-        this.moveSpeedX = unitX * 0.5f;
+        this.moveSpeedX = unitX * 2f;
+        this.currentBlobSize = unitX * 10f;
 
-        pixmap = new Pixmap((int)(unitX * 10f), (int)(unitX * 10f), Pixmap.Format.RGBA8888);
+        pixmap = new Pixmap((int)currentBlobSize, (int)currentBlobSize, Pixmap.Format.RGBA8888);
         pixmap.setColor(0, 0, 0, 1.0f);
-        pixmap.fillRectangle(0, 0, (int)(unitX * 10f), (int)(unitX * 10f));
+        pixmap.fillRectangle(0, 0, (int)currentBlobSize, (int)currentBlobSize);
         texture = new Texture(pixmap);
 
         blob = new Image(texture);
-        blob.setSize(unitX * 10f, unitX * 10f);
-        blob.setPosition(0, 0);
+        blob.setSize(currentBlobSize, currentBlobSize);
 
         this.addActor(blob);
     }
 
     public void update(float moveDirection) {
-        this.setX(this.getX() + moveSpeedX * moveDirection);
+        if (((int)moveDirection == 1 && (this.getX() + currentBlobSize) < unitX * 88f) ||
+                ((int)moveDirection == -1 && this.getX() > unitX * 12f)) {
+            this.setX(this.getX() + moveSpeedX * moveDirection);
+        }
     }
 
     public void dispose() {
