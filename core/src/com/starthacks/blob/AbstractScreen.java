@@ -35,7 +35,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
         }
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(true, SCREEN_WIDTH, SCREEN_HEIGHT);
+        camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
         this.setViewport(new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, camera));
     }
 

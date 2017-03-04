@@ -12,15 +12,19 @@ public class GameScreen extends AbstractScreen {
     private float playerMoveDirection; // -1 (left), 0 (stay), 1 (right)
     private float playerYSpeed;
     private float GRAVITY;
+    private AbstractLevel level;
 
     public GameScreen(final MainActivity game) {
         super(game);
         playerIsJumping = false;
         isPlayerDead = false;
 
-        player = new Blob(UNIT_X, UNIT_Y);
-        player.setPosition(UNIT_X * 50f, 10);
+        level = new Level1(UNIT_X, UNIT_Y);
 
+        player = new Blob(UNIT_X, UNIT_Y);
+        player.setPosition(UNIT_X * 50f, 200);
+
+        this.addActor(level);
         this.addActor(player);
     }
 
@@ -144,5 +148,6 @@ public class GameScreen extends AbstractScreen {
     @Override
     public void dispose() {
         player.dispose();
+        level.dispose();
     }
 }
