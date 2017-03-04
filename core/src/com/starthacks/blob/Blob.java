@@ -34,6 +34,7 @@ public class Blob extends Group {
         this.setX(this.getX() + moveSpeedX * moveDirection);
     }
 
+
     public void dispose() {
         pixmap.dispose();
         texture.dispose();
