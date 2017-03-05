@@ -121,6 +121,12 @@ public class GameScreen extends AbstractScreen {
             if ((playerMoveDirection == -1 && !level.playerCanMoveLeft(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight())) ||
                     (playerMoveDirection == 1 && !level.playerCanMoveRight(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight()))) {
                 player.update(0);
+            } else if ((int) playerMoveDirection == 1 && (player.getX() + player.getPlayerWidth()) < UNIT_X * 98f) {
+                player.update(playerMoveDirection);
+                level.setX(level.getX() - player.getPlayerSpeed());
+            } else if ((int) playerMoveDirection == -1 && player.getX() > UNIT_X * 0.5f) {
+                player.update(playerMoveDirection);
+                level.setX(level.getX() + player.getPlayerSpeed());
             } else {
                 player.update(playerMoveDirection);
             }

@@ -16,6 +16,7 @@ public abstract class AbstractLevel extends Group {
     protected boolean playerCanFallDown;
     protected GameScreen gameScreen;
     protected float playerPositionX, playerPositionY;
+    protected float levelEndX, levelEndY;
 
     public AbstractLevel(float unitX, float unitY) {
         this.unitX = unitX;
@@ -29,6 +30,14 @@ public abstract class AbstractLevel extends Group {
         texture = new Texture(pixmap);
 
         platformObjects = new ArrayList<PlatformObject>();
+    }
+
+    public float getLevelEndX() {
+        return levelEndX;
+    }
+
+    public float getLevelEndY() {
+        return levelEndY;
     }
 
     public boolean playerCanMoveLeft(float playerX, float playerY, float playerWidth, float playerHeight) {
