@@ -11,6 +11,8 @@ public class Level_2 extends AbstractLevel {
 
         public Level_2(float unitX, float unitY) {
             super(unitX, unitY);
+            destinationPositionX = 400f * unitX;
+            destinationPositionY = 70f * unitY;
 
             for (int i = 0; i < NUM_PLATFORMS; ++i) {
                 PlatformObject platformObject = new PlatformObject(this.texture, unitX, unitY);

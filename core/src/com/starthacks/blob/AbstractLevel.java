@@ -14,14 +14,12 @@ public abstract class AbstractLevel extends Group {
     private Pixmap pixmap;
     protected Texture texture;
     protected boolean playerCanFallDown;
-    protected GameScreen gameScreen;
     protected float playerPositionX, playerPositionY;
-    protected float levelEndX, levelEndY;
+    protected float destinationPositionX, destinationPositionY;
 
     public AbstractLevel(float unitX, float unitY) {
         this.unitX = unitX;
         this.unitY = unitY;
-        this.gameScreen = gameScreen;
         playerCanFallDown = false;
 
         pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
@@ -30,14 +28,6 @@ public abstract class AbstractLevel extends Group {
         texture = new Texture(pixmap);
 
         platformObjects = new ArrayList<PlatformObject>();
-    }
-
-    public float getLevelEndX() {
-        return levelEndX;
-    }
-
-    public float getLevelEndY() {
-        return levelEndY;
     }
 
     public boolean playerCanMoveLeft(float playerX, float playerY, float playerWidth, float playerHeight) {
@@ -113,6 +103,7 @@ public abstract class AbstractLevel extends Group {
     }
 
     public void dispose() {
+        this.clearChildren();
         pixmap.dispose();
         texture.dispose();
     }
@@ -127,5 +118,13 @@ public abstract class AbstractLevel extends Group {
 
     public float getPlayerPositionY() {
         return playerPositionY;
+    }
+
+    public float getDestinationPositionX() {
+        return destinationPositionX;
+    }
+
+    public float getDestinationPositionY() {
+        return destinationPositionY;
     }
 }

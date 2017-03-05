@@ -14,6 +14,8 @@ public class GameScreen extends AbstractScreen {
     private boolean playerIsJumping, isPlayerDead;
     private float playerMoveDirection; // -1 (left), 0 (stay), 1 (right)
     private AbstractLevel level;
+    private BackgroundGroup backgroundGroup;
+    private int currentLevel;
 
     public GameScreen(final MainActivity game) {
         super(game);
@@ -25,6 +27,9 @@ public class GameScreen extends AbstractScreen {
         currentGravity = gravity;
         dropSpeedY = 0;
         dropGravity = gravity;
+        currentLevel = 1;
+
+        backgroundGroup = new BackgroundGroup(UNIT_X, UNIT_Y);
 
         level = new Level1(UNIT_X, UNIT_Y);
         //level = new Level_2(UNIT_X,UNIT_Y);
@@ -32,6 +37,7 @@ public class GameScreen extends AbstractScreen {
         player = new Blob(UNIT_X, UNIT_Y);
         player.setPosition(UNIT_X * 1f, UNIT_Y * 10f);
 
+        this.addActor(backgroundGroup);
         this.addActor(level);
         this.addActor(player);
     }
@@ -117,15 +123,27 @@ public class GameScreen extends AbstractScreen {
     @Override
     public void update() {
         // update values like position size etc
+        if (level.getDestinationPositionX() + level.getX() <= player.getX()) {
+            level.dispose();
+            currentLevel++;
+            if (currentLevel == 2) {
+                level = new Level_2(UNIT_X, UNIT_Y);
+            }
+            level.setX(0);
+            player.setPosition(UNIT_X * 1f, UNIT_Y * 10f);
+            this.addActor(level);
+        }
         if (!isPlayerDead) {
             if ((playerMoveDirection == -1 && !level.playerCanMoveLeft(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight())) ||
                     (playerMoveDirection == 1 && !level.playerCanMoveRight(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight()))) {
                 player.update(0);
             } else if ((int) playerMoveDirection == -1 && player.getX() > UNIT_X * 1f) {
                 player.update(playerMoveDirection);
+                backgroundGroup.update(playerMoveDirection);
                 level.setX(level.getX() + player.getPlayerSpeed());
             } else if (playerMoveDirection != -1) {
                 player.update(playerMoveDirection);
+                backgroundGroup.update(playerMoveDirection);
                 level.setX(level.getX() + player.getPlayerSpeed() * playerMoveDirection * -1);
             }
 
