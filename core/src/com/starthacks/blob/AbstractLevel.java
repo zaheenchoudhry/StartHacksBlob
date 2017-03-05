@@ -37,7 +37,7 @@ public abstract class AbstractLevel extends Group {
             PlatformObject platform = platformObjects.get(i);
             if ((playerX <= (platform.getX() + platform.getPlatformWidth() + this.getX())) &&
                     ((playerX + playerWidth) >= (platform.getX() + platform.getPlatformWidth() + this.getX())) &&
-                    ((playerY >= (platform.getY() + this.getY()) && (playerY <= (platform.getY() + platform.getPlatformHeight() + this.getY()))) ||
+                    ((playerY >= (platform.getY() + this.getY()) && (playerY <= (platform.getY() + platform.getPlatformHeight() * 0.95f + this.getY()))) ||
                             ((playerY + playerHeight) >= (platform.getY() + this.getY()) && (playerY + playerHeight) <= (platform.getY() + platform.getPlatformHeight() + this.getY())))) {
                 return false;
             }
@@ -63,7 +63,7 @@ public abstract class AbstractLevel extends Group {
         for(int i = 0; i < numOfPlatformObjects; ++i) {
             PlatformObject platform = platformObjects.get(i);
             if (((playerY + playerHeight) >= (platform.getY() + this.getY())) &&
-                    ((playerY + playerHeight) <= (platform.getY() + (platform.getPlatformHeight() * 0.1f) + this.getY())) &&
+                    ((playerY + playerHeight) <= (platform.getY() + (platform.getPlatformHeight() * 0.5f) + this.getY())) &&
                     ((playerX >= (platform.getX() + this.getX()) && playerX <= (platform.getX() + platform.getPlatformWidth() + this.getX() - (0.05f * unitX)))
                             || ((playerX + playerWidth) >= (platform.getX() + this.getX()) && (playerX + playerWidth) <= (platform.getX() + platform.getPlatformWidth() + this.getX())))) {
                 return true;

@@ -82,6 +82,26 @@ public class Blob extends Group {
         blobleft5 = new Image (textureleft5);
         blobleft6 = new Image (textureleft6);
 
+        blobright1.setY(-currentBlobSize * 0.15f);
+        blobright2.setY(-currentBlobSize * 0.15f);
+        blobright3.setY(-currentBlobSize * 0.15f);
+        blobright4.setY(-currentBlobSize * 0.15f);
+        blobright5.setY(-currentBlobSize * 0.15f);
+        blobright6.setY(-currentBlobSize * 0.15f);
+        blobleft1.setY(-currentBlobSize * 0.15f);
+        blobleft2.setY(-currentBlobSize * 0.15f);
+        blobleft3.setY(-currentBlobSize * 0.15f);
+        blobleft4.setY(-currentBlobSize * 0.15f);
+        blobleft5.setY(-currentBlobSize * 0.15f);
+        blobleft6.setY(-currentBlobSize * 0.15f);
+
+        blobright1.setX(-currentBlobSize * 0.15f);
+        blobright2.setX(-currentBlobSize * 0.15f);
+        blobright3.setX(-currentBlobSize * 0.15f);
+        blobright4.setX(-currentBlobSize * 0.15f);
+        blobright5.setX(-currentBlobSize * 0.15f);
+        blobright6.setX(-currentBlobSize * 0.15f);
+
         blobright1.setSize(currentBlobSize, currentBlobSize);
         blobright2.setSize(currentBlobSize, currentBlobSize);
         blobright3.setSize(currentBlobSize, currentBlobSize);
@@ -128,15 +148,20 @@ public class Blob extends Group {
     }
 
     public float getPlayerWidth() {
-        return currentBlobSize;
+        return currentBlobSize * 0.85f;
     }
 
     public float getPlayerHeight() {
-        return currentBlobSize;
+        return currentBlobSize* 0.85f;
     }
 
     public void update(float moveDirection) {
+<<<<<<< HEAD
         if ((int) moveDirection == 0 && lastDirection==1) {
+=======
+        if ((int) moveDirection == 1 && (this.getX() + currentBlobSize) < unitX * 98f) {
+            this.setX(this.getX() + moveSpeedX * moveDirection);
+>>>>>>> a4be14bc6ceb88e1745b81a807f6892bc39bff92
             counter += 1;
             if (counter >= 5) {
                 counter = 0;
@@ -148,6 +173,7 @@ public class Blob extends Group {
                 this.addActor(rightarray.get(currentindex));
 
             }
+<<<<<<< HEAD
         } else if ((int) moveDirection == 0 && lastDirection==-1) {
                 counter += 1;
                 if (counter >= 5) {
@@ -175,6 +201,9 @@ public class Blob extends Group {
                 }
         } else if ((int) moveDirection == -1 && this.getX() > unitX * 12f) {
             lastDirection=-1;
+=======
+        } else if ((int) moveDirection == -1 && this.getX() > unitX * 0.5f) {
+>>>>>>> a4be14bc6ceb88e1745b81a807f6892bc39bff92
             this.setX(this.getX() + moveSpeedX * moveDirection);
             counter += 1;
                 if (counter >= 5) {
