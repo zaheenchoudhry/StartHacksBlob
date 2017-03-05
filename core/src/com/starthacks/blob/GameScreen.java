@@ -128,6 +128,8 @@ public class GameScreen extends AbstractScreen {
             currentLevel++;
             if (currentLevel == 2) {
                 level = new Level_2(UNIT_X, UNIT_Y);
+            } else if (currentLevel==3){
+                level = new Level3(UNIT_X, UNIT_Y);
             }
             level.setX(0);
             level.setY(0);

@@ -7,12 +7,12 @@ import java.util.List;
 
 public class Level_2 extends AbstractLevel {
 
-        private final int NUM_PLATFORMS = 10;
+        private final int NUM_PLATFORMS = 9;
 
         public Level_2(float unitX, float unitY) {
             super(unitX, unitY);
-            destinationPositionX = 400f * unitX;
-            destinationPositionY = 70f * unitY;
+            destinationPositionX = 220f * unitX;
+            destinationPositionY = 146f * unitY;
 
             for (int i = 0; i < NUM_PLATFORMS; ++i) {
                 PlatformObject platformObject = new PlatformObject(this.texture, unitX, unitY);
@@ -44,11 +44,9 @@ public class Level_2 extends AbstractLevel {
             platformObjects.get(7).setPlatformSize(unitX * 30f, unitY * 10f);
             platformObjects.get(7).setPosition(unitX * 180f, unitY * 120f);
 
-            platformObjects.get(8).setPlatformSize(unitX * 30f, unitY * 155f);
+            platformObjects.get(8).setPlatformSize(unitX * 30f, unitY * 145f);
             platformObjects.get(8).setPosition(unitX * 210f, unitY * 0.05f);
 
-//            platformObjects.get(9).setPlatformSize(unitX * 15f, unitY * 300f);
-//            platformObjects.get(9).setPosition(unitX * 220f, unitY * 0.05f);
         }
 
         @Override

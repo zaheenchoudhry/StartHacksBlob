@@ -30,7 +30,7 @@ public class BackgroundGroup extends Group {
 
         backgroundImageTexture3 = new Texture("bg-day.png");
         backgroundImage3 = new Image(backgroundImageTexture3);
-        backgroundImage3.setSize(unitX * 180f, unitY * 120f);
+        backgroundImage3.setSize(unitX * 200f, unitY * 140f);
         backgroundImage3.setVisible(false);
 
 
