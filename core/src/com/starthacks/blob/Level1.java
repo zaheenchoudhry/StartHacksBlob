@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Level1 extends AbstractLevel {
 
-    private final int NUM_PLATFORMS = 5;
+    private final int NUM_PLATFORMS = 6;
 
     public Level1(float unitX, float unitY) {
         super(unitX, unitY);
@@ -18,16 +18,18 @@ public class Level1 extends AbstractLevel {
             this.addActor(platformObject);
         }
 
-        platformObjects.get(0).setPlatformSize(unitX * 135f, unitY * 10f);
+        platformObjects.get(0).setPlatformSize(unitX * 200f, unitY * 10f);
         platformObjects.get(0).setPosition(0, unitY * 0.05f);
         platformObjects.get(1).setPlatformSize(unitX * 30f, unitY * 10f);
         platformObjects.get(1).setPosition(unitX * 25f, unitY * 40f);
-        platformObjects.get(2).setPlatformSize(unitX * 10f, unitY * 40f);
-        platformObjects.get(2).setPosition(unitX * 45f, unitY * 10f);
+        platformObjects.get(2).setPlatformSize(unitX * 30f, unitY * 40f);
+        platformObjects.get(2).setPosition(unitX * 25f, unitY * 10f);
         platformObjects.get(3).setPlatformSize(unitX * 30f, unitY * 10f);
         platformObjects.get(3).setPosition(unitX * 85f, unitY * 40f);
-        platformObjects.get(4).setPlatformSize(unitX * 30f, unitY * 10f);
-        platformObjects.get(4).setPosition(unitX * 135f, unitY * 40f);
+        platformObjects.get(4).setPlatformSize(unitX * 30f, unitY * 70f);
+        platformObjects.get(4).setPosition(unitX * 140f, unitY * 0f);
+        platformObjects.get(5).setPlatformSize(unitX * 30f, unitY * 160f);
+        platformObjects.get(5).setPosition(unitX* 170f, unitY * 0f);
     }
 
     @Override

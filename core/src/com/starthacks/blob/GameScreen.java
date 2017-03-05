@@ -17,7 +17,7 @@ public class GameScreen extends AbstractScreen {
 
     public GameScreen(final MainActivity game) {
         super(game);
-        playerSpeedY = 6.5f * UNIT_Y;
+        playerSpeedY = 5.5f * UNIT_Y;
         gravity = 0.5f * UNIT_Y;
         playerIsJumping = false;
         isPlayerDead = false;
