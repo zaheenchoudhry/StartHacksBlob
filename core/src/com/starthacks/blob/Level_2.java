@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Level_2 extends AbstractLevel {
 
-        private final int NUM_PLATFORMS = 7;
+        private final int NUM_PLATFORMS = 8;
 
         public Level_2(float unitX, float unitY) {
             super(unitX, unitY);
@@ -20,7 +20,7 @@ public class Level_2 extends AbstractLevel {
                 this.addActor(platformObject);
             }
 
-            platformObjects.get(0).setPlatformSize(unitX * 100f, unitY * 10f);
+            platformObjects.get(0).setPlatformSize(unitX * 300f, unitY * 10f);
             platformObjects.get(0).setPosition(0, unitY * 0.05f);
             platformObjects.get(1).setPlatformSize(unitX * 30f, unitY * 10f);
             platformObjects.get(1).setPosition(unitX * 35f, unitY * 40f);
@@ -34,6 +34,8 @@ public class Level_2 extends AbstractLevel {
             platformObjects.get(5).setPosition(unitX * 135f, unitY * 100f);
             platformObjects.get(6).setPlatformSize(unitX * 30f, unitY * 10f);
             platformObjects.get(6).setPosition(unitX * 165f, unitY * 100f);
+            platformObjects.get(7).setPlatformSize(unitX * 30f, unitY * 100f);
+            platformObjects.get(7).setPosition(unitX * 220f, unitY * 0.05f);
         }
 
         @Override
