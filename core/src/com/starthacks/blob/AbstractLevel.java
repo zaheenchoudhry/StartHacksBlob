@@ -94,7 +94,7 @@ public abstract class AbstractLevel extends Group {
             PlatformObject platform = platformObjects.get(i);
             //System.out.println("Platform Y" + platform.getY());
             if ((playerY <= (platform.getY() + platform.getPlatformHeight() + this.getY())) &&
-                    (playerY >= (platform.getY() + platform.getPlatformHeight() + this.getY() - (platform.getPlatformHeight() * 0.5f))) &&
+                    (playerY >= (platform.getY() + platform.getPlatformHeight() + this.getY() - unitY * 8f)) &&
                     ((playerX >= (platform.getX() + this.getX()) && playerX <= (platform.getX() + platform.getPlatformWidth() + this.getX() - (0.05f * unitX)))
                             || ((playerX + playerWidth) >= (platform.getX() + this.getX()) && (playerX + playerWidth) <= (platform.getX() + platform.getPlatformWidth() + this.getX())))) {
                 playerCanFallDown = false;

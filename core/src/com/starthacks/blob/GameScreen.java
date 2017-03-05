@@ -17,7 +17,7 @@ public class GameScreen extends AbstractScreen {
 
     public GameScreen(final MainActivity game) {
         super(game);
-        playerSpeedY = 6.5f * UNIT_Y;
+        playerSpeedY = 5.5f * UNIT_Y;
         gravity = 0.5f * UNIT_Y;
         playerIsJumping = false;
         isPlayerDead = false;
@@ -121,15 +121,20 @@ public class GameScreen extends AbstractScreen {
             if ((playerMoveDirection == -1 && !level.playerCanMoveLeft(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight())) ||
                     (playerMoveDirection == 1 && !level.playerCanMoveRight(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight()))) {
                 player.update(0);
-            } else if ((int) playerMoveDirection == 1 && (player.getX() + player.getPlayerWidth()) < UNIT_X * 98f) {
-                player.update(playerMoveDirection);
-                level.setX(level.getX() - player.getPlayerSpeed());
-            } else if ((int) playerMoveDirection == -1 && player.getX() > UNIT_X * 0.5f) {
+            } else if ((int) playerMoveDirection == -1 && player.getX() > UNIT_X * 1f) {
                 player.update(playerMoveDirection);
                 level.setX(level.getX() + player.getPlayerSpeed());
-            } else {
+            } else if (playerMoveDirection != -1) {
                 player.update(playerMoveDirection);
+                level.setX(level.getX() + player.getPlayerSpeed() * playerMoveDirection * -1);
             }
+
+            /*
+            else if ((int) playerMoveDirection == 1 && (player.getX() + player.getPlayerWidth()) < UNIT_X * 98f) {
+                player.update(playerMoveDirection);
+                level.setX(level.getX() - player.getPlayerSpeed());
+            }
+             */
 
 
             if (playerIsJumping) {
