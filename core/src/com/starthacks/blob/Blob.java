@@ -40,12 +40,14 @@ public class Blob extends Group {
     private int counter;
     private int currentindex;
     private int lastDirection=1;
+    private float originalBlobSize;
 
     public Blob(float unitX, float unitY) {
         this.unitX = unitX;
         this.unitY = unitY;
         this.moveSpeedX = unitX * 0.5f;
-        this.currentBlobSize = unitX * 10f;
+        this.originalBlobSize = unitX * 15f;
+        this.currentBlobSize = originalBlobSize;
         currentindex=0;
 
         rightarray=new ArrayList<Image>();
@@ -143,15 +145,52 @@ public class Blob extends Group {
     }
 
     public float getPlayerWidth() {
-        return currentBlobSize * 0.85f;
+        return currentBlobSize * 0.8f;
     }
 
     public float getPlayerHeight() {
-        return currentBlobSize* 0.85f;
+        return currentBlobSize* 0.8f;
     }
 
     public float getPlayerSpeed() {
         return moveSpeedX;
+    }
+
+    public float getCurrentBlobSize() {
+        return currentBlobSize;
+    }
+
+    public float getOriginalBlobSize() {
+        return originalBlobSize;
+    }
+
+    public void setPlayerSize(float playerSize) {
+        currentBlobSize = playerSize;
+        blobright1.setSize(currentBlobSize, currentBlobSize);
+        blobright2.setSize(currentBlobSize, currentBlobSize);
+        blobright3.setSize(currentBlobSize, currentBlobSize);
+        blobright4.setSize(currentBlobSize, currentBlobSize);
+        blobright5.setSize(currentBlobSize, currentBlobSize);
+        blobright6.setSize(currentBlobSize, currentBlobSize);
+        blobleft1.setSize(currentBlobSize, currentBlobSize);
+        blobleft2.setSize(currentBlobSize, currentBlobSize);
+        blobleft3.setSize(currentBlobSize, currentBlobSize);
+        blobleft4.setSize(currentBlobSize, currentBlobSize);
+        blobleft5.setSize(currentBlobSize, currentBlobSize);
+        blobleft6.setSize(currentBlobSize, currentBlobSize);
+
+        blobright1.setY(-currentBlobSize * 0.15f);
+        blobright2.setY(-currentBlobSize * 0.15f);
+        blobright3.setY(-currentBlobSize * 0.15f);
+        blobright4.setY(-currentBlobSize * 0.15f);
+        blobright5.setY(-currentBlobSize * 0.15f);
+        blobright6.setY(-currentBlobSize * 0.15f);
+        blobleft1.setY(-currentBlobSize * 0.15f);
+        blobleft2.setY(-currentBlobSize * 0.15f);
+        blobleft3.setY(-currentBlobSize * 0.15f);
+        blobleft4.setY(-currentBlobSize * 0.15f);
+        blobleft5.setY(-currentBlobSize * 0.15f);
+        blobleft6.setY(-currentBlobSize * 0.15f);
     }
 
     public void update(float moveDirection) {
@@ -178,7 +217,7 @@ public class Blob extends Group {
                 this.addActor(leftarray.get(currentindex));
             }
 
-        } else if ((int) moveDirection == 1 && (this.getX() + currentBlobSize * 0.85f) < unitX * 98f) {
+        } else if ((int) moveDirection == 1 && (this.getX() + currentBlobSize * 0.8f) < unitX * 98f) {
             lastDirection=1;
             this.setX(this.getX() + moveSpeedX * moveDirection);
             counter += 1;

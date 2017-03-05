@@ -19,8 +19,8 @@ public class GameScreen extends AbstractScreen {
 
     public GameScreen(final MainActivity game) {
         super(game);
-        playerSpeedY = 5.5f * UNIT_Y;
-        gravity = 0.5f * UNIT_Y;
+        playerSpeedY = 3.5f * UNIT_Y;
+        gravity = 0.4f * UNIT_Y;
         playerIsJumping = false;
         isPlayerDead = false;
         currentPlayerSpeedY = playerSpeedY;
@@ -59,8 +59,8 @@ public class GameScreen extends AbstractScreen {
         if (touches.get(pointer).touchX <= SCREEN_WIDTH * 0.30f) {
             if (!playerIsJumping) {
                 playerIsJumping = true;
-                currentPlayerSpeedY = playerSpeedY;
-                currentGravity = gravity;
+                //currentPlayerSpeedY = playerSpeedY;
+                //currentGravity = gravity;
             }
         } else if (touches.get(pointer).touchX >= SCREEN_WIDTH * 0.85f) {
             playerMoveDirection = 1;
@@ -130,8 +130,19 @@ public class GameScreen extends AbstractScreen {
                 level = new Level_2(UNIT_X, UNIT_Y);
             }
             level.setX(0);
+            level.setY(0);
+            backgroundGroup.reset(currentLevel);
+            player.setPlayerSize(player.getOriginalBlobSize());
             player.setPosition(UNIT_X * 1f, UNIT_Y * 10f);
             this.addActor(level);
+        }
+        if (isPlayerDead) {
+            isPlayerDead = false;
+            level.setX(0);
+            level.setY(0);
+            backgroundGroup.reset(currentLevel);
+            player.setPlayerSize(player.getOriginalBlobSize());
+            player.setPosition(UNIT_X * 1f, UNIT_Y * 10f);
         }
         if (!isPlayerDead) {
             if ((playerMoveDirection == -1 && !level.playerCanMoveLeft(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight())) ||
@@ -160,20 +171,49 @@ public class GameScreen extends AbstractScreen {
                     currentPlayerSpeedY = (currentPlayerSpeedY > 0) ? -currentGravity : currentPlayerSpeedY;
                 }
                 player.setY(player.getY() + currentPlayerSpeedY);
+                level.setY(level.getY() - currentPlayerSpeedY);
+                if (level.getY() > 0) {
+                    level.setY(0);
+                }
+                backgroundGroup.updateY(currentLevel, level.getY() / 3f);
                 currentPlayerSpeedY -= currentGravity;
-                currentGravity -= 0.01f * UNIT_Y;
+                currentGravity -= 0.02f * UNIT_Y;
                 if (currentGravity <= 0.15f * UNIT_Y) {
                     currentGravity = 0.15f * UNIT_Y;
                 }
-                System.out.println("Gravity : " + (currentGravity / UNIT_Y));
             }
 
             level.update(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight());
             if (level.canPlayerFallDown() && !playerIsJumping) {
                 player.setY(player.getY() + dropSpeedY);
+                level.setY(level.getY() - dropSpeedY);
+                if (level.getY() > 0) {
+                    level.setY(0);
+                }
+                backgroundGroup.updateY(currentLevel, level.getY() / 3f);
                 dropSpeedY -= dropGravity;
-                dropGravity -= 0.01f * UNIT_Y;
+                dropGravity -= 0.02f * UNIT_Y;
+                if (dropGravity <= 0.15f * UNIT_Y) {
+                    dropGravity = 0.15f * UNIT_Y;
+                }
             } else if (!level.canPlayerFallDown()) {
+                float dropDisplacement = 0;
+                float dropDamage = 0;
+                if (dropSpeedY != 0 || currentPlayerSpeedY != playerSpeedY) {
+                    dropDisplacement += -dropSpeedY;
+                    dropDisplacement += (currentPlayerSpeedY < 0) ? -currentPlayerSpeedY : 0;
+                    dropDamage = dropDisplacement * 0.003f;
+                    System.out.println("Displacement " + dropDisplacement);
+                    System.out.println("Damage " + dropDamage);
+                    System.out.println("Size Decrease " + (player.getOriginalBlobSize() * dropDamage));
+                    System.out.println("Size Decrease % " + ((player.getOriginalBlobSize() * dropDamage) / UNIT_Y));
+                    player.setPlayerSize(player.getCurrentBlobSize() - player.getOriginalBlobSize() * dropDamage);
+                    if (player.getCurrentBlobSize() <= (player.getOriginalBlobSize() / UNIT_Y) * 0.25f) {
+                        isPlayerDead = true;
+                    }
+                }
+                currentPlayerSpeedY = playerSpeedY;
+                currentGravity = gravity;
                 dropSpeedY = 0;
                 dropGravity = gravity;
                 playerIsJumping = false;

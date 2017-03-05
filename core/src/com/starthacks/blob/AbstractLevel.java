@@ -23,7 +23,7 @@ public abstract class AbstractLevel extends Group {
         playerCanFallDown = false;
 
         pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pixmap.setColor(0, 0, 0, 1.0f);
+        pixmap.setColor(0.163f, 0.145f, 0.165f, 1.0f);
         pixmap.fillRectangle(0, 0, 1, 1);
         texture = new Texture(pixmap);
 
@@ -62,7 +62,7 @@ public abstract class AbstractLevel extends Group {
         for(int i = 0; i < numOfPlatformObjects; ++i) {
             PlatformObject platform = platformObjects.get(i);
             if (((playerY + playerHeight) >= (platform.getY() + this.getY())) &&
-                    ((playerY + playerHeight) <= (platform.getY() + (platform.getPlatformHeight() * 0.5f) + this.getY())) &&
+                    ((playerY + playerHeight) <= (platform.getY() + (unitY * 8f) + this.getY())) &&
                     ((playerX >= (platform.getX() + this.getX()) && playerX <= (platform.getX() + platform.getPlatformWidth() + this.getX() - (0.05f * unitX)))
                             || ((playerX + playerWidth) >= (platform.getX() + this.getX()) && (playerX + playerWidth) <= (platform.getX() + platform.getPlatformWidth() + this.getX())))) {
                 return true;
