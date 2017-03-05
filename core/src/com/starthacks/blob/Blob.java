@@ -17,7 +17,7 @@ public class Blob extends Group {
     public Blob(float unitX, float unitY) {
         this.unitX = unitX;
         this.unitY = unitY;
-        this.moveSpeedX = unitX * 1f;
+        this.moveSpeedX = unitX * 0.8f;
         this.currentBlobSize = unitX * 10f;
 
         pixmap = new Pixmap((int)currentBlobSize, (int)currentBlobSize, Pixmap.Format.RGBA8888);
