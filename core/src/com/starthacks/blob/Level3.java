@@ -19,12 +19,9 @@ public class Level3 extends AbstractLevel {
         super(unitX, unitY);
         destinationPositionX = 5f * unitX;
         destinationPositionY = 115f * unitY;
-<<<<<<< HEAD
 
 //        grasstexture=new Texture ("platform.png");
 //        grass=new Image (grasstexture);
-=======
->>>>>>> 1327050b405d5914a0ce360e97219b90c1e11ba0
 
         for (int i = 0; i < NUM_PLATFORMS; ++i) {
             GrassPlatform platformObject = new GrassPlatform(this.texture, unitX, unitY);
