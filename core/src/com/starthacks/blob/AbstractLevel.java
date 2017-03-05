@@ -31,6 +31,47 @@ public abstract class AbstractLevel extends Group {
         platformObjects = new ArrayList<PlatformObject>();
     }
 
+    public boolean playerCanMoveLeft(float playerX, float playerY, float playerWidth, float playerHeight) {
+        int numOfPlatformObjects = platformObjects.size();
+        for(int i = 0; i < numOfPlatformObjects; ++i) {
+            PlatformObject platform = platformObjects.get(i);
+            if ((playerX <= (platform.getX() + platform.getPlatformWidth() + this.getX())) &&
+                    ((playerX + playerWidth) >= (platform.getX() + platform.getPlatformWidth() + this.getX())) &&
+                    ((playerY >= (platform.getY() + this.getY()) && (playerY <= (platform.getY() + platform.getPlatformHeight() + this.getY()))) ||
+                            ((playerY + playerHeight) >= (platform.getY() + this.getY()) && (playerY + playerHeight) <= (platform.getY() + platform.getPlatformHeight() + this.getY())))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean playerCanMoveRight(float playerX, float playerY, float playerWidth, float playerHeight) {
+        int numOfPlatformObjects = platformObjects.size();
+        for(int i = 0; i < numOfPlatformObjects; ++i) {
+            PlatformObject platform = platformObjects.get(i);
+            if (((playerX + playerWidth) >= (platform.getX() + this.getX())) && (playerX <= (platform.getX() + this.getX())) &&
+                    ((playerY >= (platform.getY() + this.getY()) && (playerY <= (platform.getY() + platform.getPlatformHeight() + this.getY() - (0.05f * unitY)))) ||
+                            ((playerY + playerHeight) >= (platform.getY() + this.getY()) && (playerY + playerHeight) <= (platform.getY() + platform.getPlatformHeight() + this.getY())))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isPlatformAbove(float playerX, float playerY, float playerWidth, float playerHeight) {
+        int numOfPlatformObjects = platformObjects.size();
+        for(int i = 0; i < numOfPlatformObjects; ++i) {
+            PlatformObject platform = platformObjects.get(i);
+            if (((playerY + playerHeight) >= (platform.getY() + this.getY())) &&
+                    ((playerY + playerHeight) <= (platform.getY() + (platform.getPlatformHeight() * 0.1f) + this.getY())) &&
+                    ((playerX >= (platform.getX() + this.getX()) && playerX <= (platform.getX() + platform.getPlatformWidth() + this.getX() - (0.05f * unitX)))
+                            || ((playerX + playerWidth) >= (platform.getX() + this.getX()) && (playerX + playerWidth) <= (platform.getX() + platform.getPlatformWidth() + this.getX())))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void checkCollision(float playerX, float playerY, float playerWidth, float playerHeight) {
         playerCanFallDown = true;
 
@@ -44,7 +85,8 @@ public abstract class AbstractLevel extends Group {
             PlatformObject platform = platformObjects.get(i);
             //System.out.println("Platform Y" + platform.getY());
             if ((playerY <= (platform.getY() + platform.getPlatformHeight() + this.getY())) &&
-                    ((playerX >= (platform.getX() + this.getX()) && playerX <= (platform.getX() + platform.getPlatformWidth() + this.getX()))
+                    (playerY >= (platform.getY() + platform.getPlatformHeight() + this.getY() - (platform.getPlatformHeight() * 0.5f))) &&
+                    ((playerX >= (platform.getX() + this.getX()) && playerX <= (platform.getX() + platform.getPlatformWidth() + this.getX() - (0.05f * unitX)))
                             || ((playerX + playerWidth) >= (platform.getX() + this.getX()) && (playerX + playerWidth) <= (platform.getX() + platform.getPlatformWidth() + this.getX())))) {
                 playerCanFallDown = false;
                 playerPositionY = platform.getY() + platform.getPlatformHeight() + this.getY();

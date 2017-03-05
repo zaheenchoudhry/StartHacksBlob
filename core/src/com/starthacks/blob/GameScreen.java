@@ -17,7 +17,7 @@ public class GameScreen extends AbstractScreen {
 
     public GameScreen(final MainActivity game) {
         super(game);
-        playerSpeedY = 6.5f * UNIT_Y;
+        playerSpeedY = 5f * UNIT_Y;
         gravity = 0.5f * UNIT_Y;
         playerIsJumping = false;
         isPlayerDead = false;
@@ -118,9 +118,18 @@ public class GameScreen extends AbstractScreen {
     public void update() {
         // update values like position size etc
         if (!isPlayerDead) {
-            player.update(playerMoveDirection);
+            if ((playerMoveDirection == -1 && !level.playerCanMoveLeft(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight())) ||
+                    (playerMoveDirection == 1 && !level.playerCanMoveRight(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight()))) {
+                player.update(0);
+            } else {
+                player.update(playerMoveDirection);
+            }
+
 
             if (playerIsJumping) {
+                if (level.isPlatformAbove(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight())) {
+                    currentPlayerSpeedY = (currentPlayerSpeedY > 0) ? -currentGravity : currentPlayerSpeedY;
+                }
                 player.setY(player.getY() + currentPlayerSpeedY);
                 currentPlayerSpeedY -= currentGravity;
                 currentGravity -= 0.01f * UNIT_Y;
