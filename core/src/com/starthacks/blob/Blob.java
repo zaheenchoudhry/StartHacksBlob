@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
 import java.util.ArrayList;
 
 public class Blob extends Group {
@@ -41,6 +40,7 @@ public class Blob extends Group {
     private int counter;
     private int counterleft;
     private int currentindex;
+    private int lastDirection=1;
 //    private Pixmap pixmap;
 
     public Blob(float unitX, float unitY) {
@@ -156,8 +156,16 @@ public class Blob extends Group {
     }
 
     public void update(float moveDirection) {
+<<<<<<< HEAD
         if ((int) moveDirection == 1 && (this.getX() + currentBlobSize * 0.85f) < unitX * 98f) {
+=======
+<<<<<<< HEAD
+        if ((int) moveDirection == 0 && lastDirection==1) {
+=======
+        if ((int) moveDirection == 1 && (this.getX() + currentBlobSize) < unitX * 98f) {
+>>>>>>> 90d357eca24cb8992283d90085738a65104804d9
             this.setX(this.getX() + moveSpeedX * moveDirection);
+>>>>>>> a4be14bc6ceb88e1745b81a807f6892bc39bff92
             counter += 1;
             if (counter >= 5) {
                 counter = 0;
@@ -167,19 +175,50 @@ public class Blob extends Group {
                 clearChildren();
                 rightarray.get(currentindex).setVisible(true);
                 this.addActor(rightarray.get(currentindex));
+
             }
-        } else if ((int) moveDirection == -1 && this.getX() > unitX * 0.5f) {
+<<<<<<< HEAD
+        } else if ((int) moveDirection == 0 && lastDirection==-1) {
+                counter += 1;
+                if (counter >= 5) {
+                    counter = 0;
+                    leftarray.get(currentindex).setVisible(false);
+                    currentindex += 1;
+                    currentindex = (currentindex >= 6) ? 0 : currentindex;
+                    clearChildren();
+                    leftarray.get(currentindex).setVisible(true);
+                    this.addActor(leftarray.get(currentindex));
+
+                }
+        } else if ((int) moveDirection == 1 && (this.getX() + currentBlobSize) < unitX * 88f) {
+            lastDirection=1;
             this.setX(this.getX() + moveSpeedX * moveDirection);
             counter += 1;
-            if (counter >= 5) {
-                counter = 0;
-                leftarray.get(currentindex).setVisible(false);
-                currentindex += 1;
-                currentindex = (currentindex >= 6) ? 0 : currentindex;
-                clearChildren();
-                leftarray.get(currentindex).setVisible(true);
-                this.addActor(leftarray.get(currentindex));
-            }
+                if (counter >= 5) {
+                    counter = 0;
+                    rightarray.get(currentindex).setVisible(false);
+                    currentindex += 1;
+                    currentindex = (currentindex >= 6) ? 0 : currentindex;
+                    clearChildren();
+                    rightarray.get(currentindex).setVisible(true);
+                    this.addActor(rightarray.get(currentindex));
+                }
+        } else if ((int) moveDirection == -1 && this.getX() > unitX * 12f) {
+            lastDirection=-1;
+=======
+        } else if ((int) moveDirection == -1 && this.getX() > unitX * 0.5f) {
+>>>>>>> a4be14bc6ceb88e1745b81a807f6892bc39bff92
+            this.setX(this.getX() + moveSpeedX * moveDirection);
+            counter += 1;
+                if (counter >= 5) {
+                    counter = 0;
+                    leftarray.get(currentindex).setVisible(false);
+                    currentindex += 1;
+                    currentindex = (currentindex >= 6) ? 0 : currentindex;
+                    clearChildren();
+                    leftarray.get(currentindex).setVisible(true);
+                    this.addActor(leftarray.get(currentindex));
+                }
         }
     }
 
