@@ -101,7 +101,7 @@ public class GameScreen extends AbstractScreen {
         return false;
     }
 
-    @Override
+        @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         if (pointer == 0 || pointer == 1) {
             lastDownPointer = pointer;
