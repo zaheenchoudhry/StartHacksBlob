@@ -17,7 +17,7 @@ public class GameScreen extends AbstractScreen {
 
     public GameScreen(final MainActivity game) {
         super(game);
-        playerSpeedY = 5f * UNIT_Y;
+        playerSpeedY = 6.5f * UNIT_Y;
         gravity = 0.5f * UNIT_Y;
         playerIsJumping = false;
         isPlayerDead = false;
@@ -30,7 +30,7 @@ public class GameScreen extends AbstractScreen {
         //level = new Level_2(UNIT_X,UNIT_Y);
 
         player = new Blob(UNIT_X, UNIT_Y);
-        player.setPosition(UNIT_X * 10f, UNIT_Y * 10f);
+        player.setPosition(UNIT_X * 1f, UNIT_Y * 10f);
 
         this.addActor(level);
         this.addActor(player);

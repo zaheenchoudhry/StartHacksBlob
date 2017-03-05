@@ -136,7 +136,7 @@ public class Blob extends Group {
     }
 
     public void update(float moveDirection) {
-        if ((int) moveDirection == 1 && (this.getX() + currentBlobSize) < unitX * 88f) {
+        if ((int) moveDirection == 1 && (this.getX() + currentBlobSize) < unitX * 98f) {
             this.setX(this.getX() + moveSpeedX * moveDirection);
             counter += 1;
             if (counter >= 5) {
@@ -148,7 +148,7 @@ public class Blob extends Group {
                 rightarray.get(currentindex).setVisible(true);
                 this.addActor(rightarray.get(currentindex));
             }
-        } else if ((int) moveDirection == -1 && this.getX() > unitX * 12f) {
+        } else if ((int) moveDirection == -1 && this.getX() > unitX * 0.5f) {
             this.setX(this.getX() + moveSpeedX * moveDirection);
             counter += 1;
             if (counter >= 5) {
