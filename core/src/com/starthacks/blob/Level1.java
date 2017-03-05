@@ -20,11 +20,15 @@ public class Level1 extends AbstractLevel {
             this.addActor(platformObject);
         }
 
+<<<<<<< HEAD
         platformObjects.get(0).setPlatformSize(unitX * 205f, unitY * 10f);
+=======
+        platformObjects.get(0).setPlatformSize(unitX * 135f, unitY * 10f);
+>>>>>>> b483627ecbf75e0c684a16e76275724405fe15f1
         platformObjects.get(0).setPosition(0, unitY * 0.05f);
         platformObjects.get(1).setPlatformSize(unitX * 30f, unitY * 10f);
         platformObjects.get(1).setPosition(unitX * 25f, unitY * 40f);
-        platformObjects.get(2).setPlatformSize(unitX * 10f, unitY * 30f);
+        platformObjects.get(2).setPlatformSize(unitX * 10f, unitY * 40f);
         platformObjects.get(2).setPosition(unitX * 45f, unitY * 10f);
         platformObjects.get(3).setPlatformSize(unitX * 30f, unitY * 10f);
         platformObjects.get(3).setPosition(unitX * 85f, unitY * 40f);
