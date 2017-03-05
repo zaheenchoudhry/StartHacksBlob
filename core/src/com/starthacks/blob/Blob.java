@@ -44,7 +44,7 @@ public class Blob extends Group {
     public Blob(float unitX, float unitY) {
         this.unitX = unitX;
         this.unitY = unitY;
-        this.moveSpeedX = unitX * 0.8f;
+        this.moveSpeedX = unitX * 0.5f;
         this.currentBlobSize = unitX * 10f;
         currentindex=0;
 
