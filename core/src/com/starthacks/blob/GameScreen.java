@@ -6,16 +6,18 @@ import com.badlogic.gdx.graphics.GL20;
 
 public class GameScreen extends AbstractScreen {
 
+    private float playerSpeedY, gravity;
+    private float currentPlayerSpeedY, currentGravity;
     private Blob player;
     private int lastDownPointer;
     private boolean playerIsJumping, isPlayerDead;
     private float playerMoveDirection; // -1 (left), 0 (stay), 1 (right)
-    private float playerYSpeed;
-    private float GRAVITY;
     private AbstractLevel level;
 
     public GameScreen(final MainActivity game) {
         super(game);
+        playerSpeedY = 4f * UNIT_Y;
+        gravity = 0.5f * UNIT_Y;
         playerIsJumping = false;
         isPlayerDead = false;
 
@@ -43,26 +45,21 @@ public class GameScreen extends AbstractScreen {
     private void checkTouchCond(int pointer) {
         // jump
         if (touches.get(pointer).touchX <= SCREEN_WIDTH * 0.30f) {
-            playerIsJumping = true;
-            playerYSpeed = 5f*UNIT_Y;
-            GRAVITY = 0.5f*UNIT_Y;
-        }
-
-
-
-        // move
-        if (touches.get(pointer).touchX >= SCREEN_WIDTH * 0.85f) {
+            if (!playerIsJumping) {
+                playerIsJumping = true;
+                currentPlayerSpeedY = playerSpeedY;
+                currentGravity = gravity;
+            }
+        } else if (touches.get(pointer).touchX >= SCREEN_WIDTH * 0.85f) {
             playerMoveDirection = 1;
-        } else if (touches.get(pointer).touchX >= SCREEN_WIDTH * 0.70f) {
+        } else if (touches.get(pointer).touchX >= SCREEN_WIDTH * 0.65f) {
             playerMoveDirection = -1;
         } else {
-            playerMoveDirection = 0;
+            //playerMoveDirection = 0;
         }
     }
 
     private void checkTouch() {
-        playerMoveDirection = 0;
-
         if (touches.get(0).touched && touches.get(1).touched) {
             checkTouchCond(lastDownPointer);
         } else if (touches.get(0).touched) {
@@ -91,6 +88,7 @@ public class GameScreen extends AbstractScreen {
             touches.get(pointer).touchX = 0;
             touches.get(pointer).touchY = 0;
             touches.get(pointer).touched = false;
+            playerMoveDirection = 0;
             checkTouch();
             return true;
         }
@@ -110,8 +108,6 @@ public class GameScreen extends AbstractScreen {
         return false;
     }
 
-
-
     @Override
     public void update() {
         // update values like position size etc
@@ -119,9 +115,20 @@ public class GameScreen extends AbstractScreen {
             player.update(playerMoveDirection);
 
             if (playerIsJumping) {
-                player.setY(player.getY()+playerYSpeed);
-                playerYSpeed -= GRAVITY;
-                GRAVITY -= 0.05;
+                player.setY(player.getY() + currentPlayerSpeedY);
+                currentPlayerSpeedY -= currentGravity;
+                currentGravity -= 0.001f * UNIT_Y;
+                /*if (currentGravity <= 0.15f * UNIT_Y) {
+                    currentGravity = 0.15f * UNIT_Y;
+                }*/
+                System.out.println("Gravity : " + (currentGravity / UNIT_Y));
+            }
+
+            level.update(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight());
+            if (!level.canPlayerFallDown()) {
+                System.out.println("STOP STOP");
+                playerIsJumping = false;
+                player.setY(level.getPlayerPositionY());
             }
         }
     }

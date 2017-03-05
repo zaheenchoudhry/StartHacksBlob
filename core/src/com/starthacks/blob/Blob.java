@@ -17,7 +17,7 @@ public class Blob extends Group {
     public Blob(float unitX, float unitY) {
         this.unitX = unitX;
         this.unitY = unitY;
-        this.moveSpeedX = unitX * 2f;
+        this.moveSpeedX = unitX * 1f;
         this.currentBlobSize = unitX * 10f;
 
         pixmap = new Pixmap((int)currentBlobSize, (int)currentBlobSize, Pixmap.Format.RGBA8888);
@@ -29,6 +29,14 @@ public class Blob extends Group {
         blob.setSize(currentBlobSize, currentBlobSize);
 
         this.addActor(blob);
+    }
+
+    public float getPlayerWidth() {
+       return currentBlobSize;
+    }
+
+    public float getPlayerHeight() {
+        return currentBlobSize;
     }
 
     public void update(float moveDirection) {

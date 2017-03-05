@@ -22,6 +22,8 @@ public class PlatformObject extends Group {
     }
 
     public void setPlatformSize(float platformSizeX, float platformSizeY) {
+        this.platformSizeX = platformSizeX;
+        this.platformSizeY = platformSizeY;
         platform.setSize(platformSizeX, platformSizeY);
     }
 
@@ -30,5 +32,13 @@ public class PlatformObject extends Group {
     }
 
     public void dispose() {
+    }
+
+    public float getPlatformWidth() {
+        return platformSizeX;
+    }
+
+    public float getPlatformHeight() {
+        return platformSizeY;
     }
 }
