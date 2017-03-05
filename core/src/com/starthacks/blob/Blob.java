@@ -191,6 +191,13 @@ public class Blob extends Group {
         blobleft4.setY(-currentBlobSize * 0.15f);
         blobleft5.setY(-currentBlobSize * 0.15f);
         blobleft6.setY(-currentBlobSize * 0.15f);
+
+        blobright1.setX(-currentBlobSize * 0.15f);
+        blobright2.setX(-currentBlobSize * 0.15f);
+        blobright3.setX(-currentBlobSize * 0.15f);
+        blobright4.setX(-currentBlobSize * 0.15f);
+        blobright5.setX(-currentBlobSize * 0.15f);
+        blobright6.setX(-currentBlobSize * 0.15f);
     }
 
     public void update(float moveDirection) {

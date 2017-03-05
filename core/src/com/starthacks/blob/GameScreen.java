@@ -132,6 +132,7 @@ public class GameScreen extends AbstractScreen {
             level.setX(0);
             level.setY(0);
             backgroundGroup.reset(currentLevel);
+            backgroundGroup.setX(0);
             player.setPlayerSize(player.getOriginalBlobSize());
             player.setPosition(UNIT_X * 1f, UNIT_Y * 10f);
             this.addActor(level);
@@ -141,6 +142,7 @@ public class GameScreen extends AbstractScreen {
             level.setX(0);
             level.setY(0);
             backgroundGroup.reset(currentLevel);
+            backgroundGroup.setX(0);
             player.setPlayerSize(player.getOriginalBlobSize());
             player.setPosition(UNIT_X * 1f, UNIT_Y * 10f);
         }
@@ -208,7 +210,7 @@ public class GameScreen extends AbstractScreen {
                     System.out.println("Size Decrease " + (player.getOriginalBlobSize() * dropDamage));
                     System.out.println("Size Decrease % " + ((player.getOriginalBlobSize() * dropDamage) / UNIT_Y));
                     player.setPlayerSize(player.getCurrentBlobSize() - player.getOriginalBlobSize() * dropDamage);
-                    if (player.getCurrentBlobSize() <= (player.getOriginalBlobSize() / UNIT_Y) * 0.25f) {
+                    if (player.getCurrentBlobSize() <= (player.getOriginalBlobSize() / 10f) * 1.5f) {
                         isPlayerDead = true;
                     }
                 }
