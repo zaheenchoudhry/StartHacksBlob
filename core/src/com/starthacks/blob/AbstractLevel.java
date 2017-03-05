@@ -37,7 +37,7 @@ public abstract class AbstractLevel extends Group {
             PlatformObject platform = platformObjects.get(i);
             if ((playerX <= (platform.getX() + platform.getPlatformWidth() + this.getX())) &&
                     ((playerX + playerWidth) >= (platform.getX() + platform.getPlatformWidth() + this.getX())) &&
-                    ((playerY >= (platform.getY() + this.getY()) && (playerY <= (platform.getY() + platform.getPlatformHeight() + this.getY()))) ||
+                    ((playerY >= (platform.getY() + this.getY()) && (playerY <= (platform.getY() + platform.getPlatformHeight() * 0.95f + this.getY()))) ||
                             ((playerY + playerHeight) >= (platform.getY() + this.getY()) && (playerY + playerHeight) <= (platform.getY() + platform.getPlatformHeight() + this.getY())))) {
                 return false;
             }
