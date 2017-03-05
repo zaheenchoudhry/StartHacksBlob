@@ -5,27 +5,25 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Level1 extends Group {
+public class Level1 extends AbstractLevel {
 
-    private float unitX, unitY;
-    private List<PlatformObject> platformObjects;
+    private final int NUM_PLATFORMS = 1;
 
     public Level1(float unitX, float unitY) {
-        this.unitX = unitX;
-        this.unitY = unitY;
+        super(unitX, unitY);
 
-        platformObjects = new ArrayList<PlatformObject>();
+        for (int i = 0; i < NUM_PLATFORMS; ++i) {
+            PlatformObject platformObject = new PlatformObject(this.texture, unitX, unitY);
+            platformObjects.add(platformObject);
+            this.addActor(platformObject);
+        }
+
+        platformObjects.get(0).setPlatformSize(unitX * 100f, unitY * 10f);
+        platformObjects.get(0).setPosition(0, unitY * 0.05f);
     }
 
-    public void checkCollision(float playerX, float playerY, float playerWidth, float playerHeight) {
-
-    }
-
+    @Override
     public void update(float playerX, float playerY, float playerWidth, float playerHeight) {
-        checkCollision(playerX, playerY, playerWidth, playerHeight);
-    }
-
-    public void dispose() {
-
+        super.update(playerX, playerY, playerWidth, playerHeight);
     }
 }

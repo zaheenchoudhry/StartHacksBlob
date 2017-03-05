@@ -7,24 +7,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class PlatformObject extends Group {
 
-    private float unitX, unitY;
+    private float unitX, unitY, platformSizeX, platformSizeY;
     private Image platform;
-    private Pixmap pixmap;
     private Texture texture;
 
-    public PlatformObject(float unitX, float unitY, float platformSizeX, float platformSizeY) {
+    public PlatformObject(Texture texture, float unitX, float unitY) {
         this.unitX = unitX;
         this.unitY = unitY;
-
-        pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pixmap.setColor(0, 0, 0, 1.0f);
-        pixmap.fillRectangle(0, 0, 1, 1);
-        texture = new Texture(pixmap);
+        this.texture = texture;
 
         platform = new Image(texture);
-        platform.setSize(platformSizeX, platformSizeY);
 
         this.addActor(platform);
+    }
+
+    public void setPlatformSize(float platformSizeX, float platformSizeY) {
+        platform.setSize(platformSizeX, platformSizeY);
     }
 
     public void update(float moveDirection) {
@@ -32,7 +30,5 @@ public class PlatformObject extends Group {
     }
 
     public void dispose() {
-        pixmap.dispose();
-        texture.dispose();
     }
 }
