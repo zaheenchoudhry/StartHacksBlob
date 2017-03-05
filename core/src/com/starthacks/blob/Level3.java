@@ -2,6 +2,8 @@ package com.starthacks.blob;
 
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,53 +11,59 @@ import java.util.List;
 public class Level3 extends AbstractLevel {
 
     private final int NUM_PLATFORMS = 12;
+//    private Texture grasstexture;
+//    private Image grass;
+
 
     public Level3(float unitX, float unitY) {
         super(unitX, unitY);
-        destinationPositionX = 400f * unitX;
-        destinationPositionY = 70f * unitY;
+        destinationPositionX = 5f * unitX;
+        destinationPositionY = 115f * unitY;
+
+//        grasstexture=new Texture ("platform.png");
+//        grass=new Image (grasstexture);
 
         for (int i = 0; i < NUM_PLATFORMS; ++i) {
-            PlatformObject platformObject = new PlatformObject(this.texture, unitX, unitY);
-            platformObjects.add(platformObject);
+            GrassPlatform platformObject = new GrassPlatform(this.texture, unitX, unitY);
+            GrassObjects.add(platformObject);
             this.addActor(platformObject);
         }
 
-        platformObjects.get(0).setPlatformSize(unitX * 300f, unitY * 10f);
-        platformObjects.get(0).setPosition(0, unitY * 0.05f);
+        GrassObjects.get(0).setGrassPlatformSize(unitX * 300f, unitY * 10f);
+        GrassObjects.get(0).setPosition(unitX * 0f, unitY * 0.5f);
 
-        platformObjects.get(1).setPlatformSize(unitX * 30f, unitY * 10f);
-        platformObjects.get(1).setPosition(unitX * 35f, unitY * 35f);
+        GrassObjects.get(2).setGrassPlatformSize(unitX * 10f, unitY * 35f);
+        GrassObjects.get(2).setPosition(unitX * 50f, unitY * 10f);
 
-        platformObjects.get(2).setPlatformSize(unitX * 10f, unitY * 25f);
-        platformObjects.get(2).setPosition(unitX * 55f, unitY * 10f);
+        GrassObjects.get(1).setGrassPlatformSize(unitX * 30f, unitY * 10f);
+        GrassObjects.get(1).setPosition(unitX * 30f, unitY * 35f);
 
-        platformObjects.get(3).setPlatformSize(unitX * 30f, unitY * 10f);
-        platformObjects.get(3).setPosition(unitX * 85f, unitY * 50f);
+        GrassObjects.get(3).setGrassPlatformSize(unitX * 30f, unitY * 10f);
+        GrassObjects.get(3).setPosition(unitX * 70f, unitY * 50f);
 
-        platformObjects.get(4).setPlatformSize(unitX * 30f, unitY * 10f);
-        platformObjects.get(4).setPosition(unitX * 115f, unitY * 25f);
+        GrassObjects.get(4).setGrassPlatformSize(unitX * 30f, unitY * 10f);
+        GrassObjects.get(4).setPosition(unitX * 110f, unitY * 27f);
 
-        platformObjects.get(5).setPlatformSize(unitX * 30f, unitY * 10f);
-        platformObjects.get(5).setPosition(unitX * 145f, unitY * 55f);
+        GrassObjects.get(5).setGrassPlatformSize(unitX * 30f, unitY * 10f);
+        GrassObjects.get(5).setPosition(unitX * 150f, unitY * 55f);
 
-        platformObjects.get(6).setPlatformSize(unitX * 30f, unitY * 10f);
-        platformObjects.get(6).setPosition(unitX * 180f, unitY * 85f);
+        GrassObjects.get(6).setGrassPlatformSize(unitX * 30f, unitY * 10f);
+        GrassObjects.get(6).setPosition(unitX * 175f, unitY * 85f);
 
-        platformObjects.get(7).setPlatformSize(unitX * 30f, unitY * 155f);
-        platformObjects.get(7).setPosition(unitX * 210f, unitY * 0.05f);
+        GrassObjects.get(7).setGrassPlatformSize(unitX * 30f, unitY * 145f);
+        GrassObjects.get(7).setPosition(unitX * 205f, unitY * 0.05f);
 
-        platformObjects.get(8).setPlatformSize(unitX * 30f, unitY * 10f);
-        platformObjects.get(8).setPosition(unitX * 130f, unitY * 115f);
+        GrassObjects.get(8).setGrassPlatformSize(unitX * 30f, unitY * 10f);
+        GrassObjects.get(8).setPosition(unitX * 125f, unitY * 115f);
 
-        platformObjects.get(9).setPlatformSize(unitX * 30f, unitY * 10f);
-        platformObjects.get(9).setPosition(unitX * 90f, unitY * 145f);
+        GrassObjects.get(9).setGrassPlatformSize(unitX * 30f, unitY * 10f);
+        GrassObjects.get(9).setPosition(unitX * 85f, unitY * 145f);
 
-        platformObjects.get(10).setPlatformSize(unitX * 30f, unitY * 10f);
-        platformObjects.get(10).setPosition(unitX * 50f, unitY * 125f);
+        GrassObjects.get(10).setGrassPlatformSize(unitX * 30f, unitY * 10f);
+        GrassObjects.get(10).setPosition(unitX * 45f, unitY * 125f);
 
-        platformObjects.get(11).setPlatformSize(unitX * 30f, unitY * 10f);
-        platformObjects.get(11).setPosition(unitX * 0f, unitY * 105f);
+        GrassObjects.get(11).setGrassPlatformSize(unitX * 30f, unitY * 10f);
+        GrassObjects.get(11).setPosition(unitX * 0f, unitY * 105f);
     }
 
     @Override

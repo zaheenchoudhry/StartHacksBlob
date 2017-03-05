@@ -34,15 +34,15 @@ public class BackgroundGroup extends Group {
         backgroundImage3.setVisible(false);
 
 
-        treeTexture1 = new Texture("mountain-lightest.png");
-        tree1 = new Image(treeTexture1);
-        tree1.setSize(unitX * 15f, unitY * 30f);
-        tree1.setPosition(0, unitY * 15f);
+//        treeTexture1 = new Texture("mountain-lightest.png");
+//        tree1 = new Image(treeTexture1);
+//        tree1.setSize(unitX * 15f, unitY * 30f);
+//        tree1.setPosition(0, unitY * 15f);
 
         this.addActor(backgroundImage1);
         this.addActor(backgroundImage2);
         this.addActor(backgroundImage3);
-        this.addActor(tree1);
+//        this.addActor(tree1);
     }
 
     public void reset(int i) {
