@@ -8,6 +8,7 @@ public class GameScreen extends AbstractScreen {
 
     private float playerSpeedY, gravity;
     private float currentPlayerSpeedY, currentGravity;
+    private float dropSpeedY, dropGravity;
     private Blob player;
     private int lastDownPointer;
     private boolean playerIsJumping, isPlayerDead;
@@ -20,6 +21,10 @@ public class GameScreen extends AbstractScreen {
         gravity = 0.5f * UNIT_Y;
         playerIsJumping = false;
         isPlayerDead = false;
+        currentPlayerSpeedY = playerSpeedY;
+        currentGravity = gravity;
+        dropSpeedY = 0;
+        dropGravity = gravity;
 
         level = new Level1(UNIT_X, UNIT_Y);
         level = new Level_2(UNIT_X,UNIT_Y);
@@ -118,16 +123,21 @@ public class GameScreen extends AbstractScreen {
             if (playerIsJumping) {
                 player.setY(player.getY() + currentPlayerSpeedY);
                 currentPlayerSpeedY -= currentGravity;
-                currentGravity -= 0.001f * UNIT_Y;
-                /*if (currentGravity <= 0.15f * UNIT_Y) {
+                currentGravity -= 0.01f * UNIT_Y;
+                if (currentGravity <= 0.15f * UNIT_Y) {
                     currentGravity = 0.15f * UNIT_Y;
-                }*/
+                }
                 System.out.println("Gravity : " + (currentGravity / UNIT_Y));
             }
 
             level.update(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight());
-            if (!level.canPlayerFallDown()) {
-                System.out.println("STOP STOP");
+            if (level.canPlayerFallDown() && !playerIsJumping) {
+                player.setY(player.getY() + dropSpeedY);
+                dropSpeedY -= dropGravity;
+                dropGravity -= 0.01f * UNIT_Y;
+            } else if (!level.canPlayerFallDown()) {
+                dropSpeedY = 0;
+                dropGravity = gravity;
                 playerIsJumping = false;
                 player.setY(level.getPlayerPositionY());
             }
