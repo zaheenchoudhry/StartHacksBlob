@@ -25,7 +25,7 @@ public class BackgroundGroup extends Group {
 
         backgroundImageTexture2 = new Texture("bg-evening.png");
         backgroundImage2 = new Image(backgroundImageTexture2);
-        backgroundImage2.setSize(unitX * 186f, unitY * 124f);
+        backgroundImage2.setSize(unitX * 205f, unitY * 155f);
         backgroundImage2.setVisible(false);
 
         backgroundImageTexture3 = new Texture("bg-day.png");
