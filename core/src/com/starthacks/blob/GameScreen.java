@@ -22,7 +22,7 @@ public class GameScreen extends AbstractScreen {
         level = new Level1(UNIT_X, UNIT_Y);
 
         player = new Blob(UNIT_X, UNIT_Y);
-        player.setPosition(UNIT_X * 50f, 200);
+        player.setPosition(UNIT_X * 10f, UNIT_Y * 10f);
 
         this.addActor(level);
         this.addActor(player);
