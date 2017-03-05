@@ -151,7 +151,20 @@ public class Blob extends Group {
     }
 
     public void update(float moveDirection) {
+<<<<<<< HEAD
         if ((int) moveDirection == 0 && lastDirection==1) {
+=======
+<<<<<<< HEAD
+        if ((int) moveDirection == 1 && (this.getX() + currentBlobSize * 0.85f) < unitX * 98f) {
+=======
+<<<<<<< HEAD
+        if ((int) moveDirection == 0 && lastDirection==1) {
+=======
+        if ((int) moveDirection == 1 && (this.getX() + currentBlobSize) < unitX * 98f) {
+>>>>>>> 90d357eca24cb8992283d90085738a65104804d9
+            this.setX(this.getX() + moveSpeedX * moveDirection);
+>>>>>>> a4be14bc6ceb88e1745b81a807f6892bc39bff92
+>>>>>>> 75101fd4df349a81747f63c9a63f4575078ac359
             counter += 1;
             if (counter >= 5) {
                 counter = 0;
