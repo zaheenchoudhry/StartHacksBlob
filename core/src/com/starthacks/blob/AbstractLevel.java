@@ -104,7 +104,7 @@ public abstract class AbstractLevel extends Group {
 
     public void dispose() {
         this.clearChildren();
-        pixmap.dispose();
+        //pixmap.dispose();
         texture.dispose();
     }
 

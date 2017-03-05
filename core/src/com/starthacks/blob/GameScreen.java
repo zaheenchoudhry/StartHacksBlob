@@ -16,6 +16,7 @@ public class GameScreen extends AbstractScreen {
     private AbstractLevel level;
     private BackgroundGroup backgroundGroup;
     private int currentLevel;
+    private WinDisplay winDisplay;
 
     public GameScreen(final MainActivity game) {
         super(game);
@@ -37,8 +38,12 @@ public class GameScreen extends AbstractScreen {
         player = new Blob(UNIT_X, UNIT_Y);
         player.setPosition(UNIT_X * 1f, UNIT_Y * 10f);
 
+        winDisplay = new WinDisplay(UNIT_X, UNIT_Y);
+        winDisplay.setVisible(false);
+
         this.addActor(backgroundGroup);
         this.addActor(level);
+        this.addActor(winDisplay);
         this.addActor(player);
     }
 
@@ -56,15 +61,15 @@ public class GameScreen extends AbstractScreen {
 
     private void checkTouchCond(int pointer) {
         // jump
-        if (touches.get(pointer).touchX <= SCREEN_WIDTH * 0.30f) {
-            if (!playerIsJumping) {
+        if (touches.get(pointer).touchX <= SCREEN_WIDTH * 0.30f && currentLevel != 4) {
+            if (!playerIsJumping && !level.canPlayerFallDown()) {
                 playerIsJumping = true;
                 //currentPlayerSpeedY = playerSpeedY;
                 //currentGravity = gravity;
             }
-        } else if (touches.get(pointer).touchX >= SCREEN_WIDTH * 0.85f) {
+        } else if (touches.get(pointer).touchX >= SCREEN_WIDTH * 0.85f && currentLevel != 4) {
             playerMoveDirection = 1;
-        } else if (touches.get(pointer).touchX >= SCREEN_WIDTH * 0.65f) {
+        } else if (touches.get(pointer).touchX >= SCREEN_WIDTH * 0.65f && currentLevel != 4) {
             playerMoveDirection = -1;
         } else {
             //playerMoveDirection = 0;
@@ -83,7 +88,7 @@ public class GameScreen extends AbstractScreen {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (pointer == 0 || pointer == 1) {
+        if ((pointer == 0 || pointer == 1) && currentLevel != 4) {
             lastDownPointer = pointer;
             touches.get(pointer).touchX = screenX;
             touches.get(pointer).touchY = screenY;
@@ -96,7 +101,7 @@ public class GameScreen extends AbstractScreen {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (pointer == 0 || pointer == 1) {
+        if ((pointer == 0 || pointer == 1) && currentLevel != 4) {
             touches.get(pointer).touchX = 0;
             touches.get(pointer).touchY = 0;
             touches.get(pointer).touched = false;
@@ -109,7 +114,7 @@ public class GameScreen extends AbstractScreen {
 
         @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if (pointer == 0 || pointer == 1) {
+        if ((pointer == 0 || pointer == 1) && currentLevel != 4) {
             lastDownPointer = pointer;
             touches.get(pointer).touchX = screenX;
             touches.get(pointer).touchY = screenY;
@@ -120,26 +125,47 @@ public class GameScreen extends AbstractScreen {
         return false;
     }
 
+    /*
+    ((player.getX() + player.getCurrentBlobSize() >= level.getDestinationPositionX() + level.getX()) ||
+                (player.getX() <= level.getDestinationPositionX() + level.getX() + UNIT_X * 10f)) &&
+                ((player.getY() <= level.getDestinationPositionY() + level.getY() + UNIT_Y * 10f) ||
+                        (player.getY() + player.getCurrentBlobSize() >= level.getDestinationPositionY() + level.getY()))
+     */
     @Override
     public void update() {
         // update values like position size etc
-        if (level.getDestinationPositionX() + level.getX() <= player.getX()) {
+        if (currentLevel == 4) {
+            player.update(0);
+        }
+        if (level.getDestinationPositionX() + level.getX() <= player.getX() + player.getCurrentBlobSize() &&
+                (level.getDestinationPositionX() + level.getX() + UNIT_X * 10f) > player.getX() &&
+                (level.getDestinationPositionY() + level.getY()) <= player.getY() + player.getCurrentBlobSize() &&
+                (level.getDestinationPositionY() + level.getY() + UNIT_Y * 10f) > player.getY() &&
+                currentLevel != 4) {
             level.dispose();
             currentLevel++;
             if (currentLevel == 2) {
                 level = new Level_2(UNIT_X, UNIT_Y);
-            } else if (currentLevel==3){
+            } else if (currentLevel == 3 ){
                 level = new Level3(UNIT_X, UNIT_Y);
             }
-            level.setX(0);
-            level.setY(0);
-            backgroundGroup.reset(currentLevel);
-            backgroundGroup.setX(0);
-            player.setPlayerSize(player.getOriginalBlobSize());
-            player.setPosition(UNIT_X * 1f, UNIT_Y * 10f);
-            this.addActor(level);
+            if (currentLevel == 4) {
+                winDisplay.setVisible(true);
+                player.setPlayerSize(UNIT_Y * 70f);
+                player.setPosition(UNIT_X * 55f - player.getCurrentBlobSize() / 2, UNIT_Y * 55f - player.getCurrentBlobSize() / 2);
+                player.update(1);
+                player.update(1);
+            } else {
+                level.setX(0);
+                level.setY(0);
+                backgroundGroup.reset(currentLevel);
+                backgroundGroup.setX(0);
+                player.setPlayerSize(player.getOriginalBlobSize());
+                player.setPosition(UNIT_X * 1f, UNIT_Y * 10f);
+                this.addActor(level);
+            }
         }
-        if (isPlayerDead) {
+        if (isPlayerDead && currentLevel != 4) {
             isPlayerDead = false;
             level.setX(0);
             level.setY(0);
@@ -148,7 +174,7 @@ public class GameScreen extends AbstractScreen {
             player.setPlayerSize(player.getOriginalBlobSize());
             player.setPosition(UNIT_X * 1f, UNIT_Y * 10f);
         }
-        if (!isPlayerDead) {
+        if (!isPlayerDead && currentLevel != 4) {
             if ((playerMoveDirection == -1 && !level.playerCanMoveLeft(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight())) ||
                     (playerMoveDirection == 1 && !level.playerCanMoveRight(player.getX(), player.getY(), player.getPlayerWidth(), player.getPlayerHeight()))) {
                 player.update(0);
@@ -247,7 +273,10 @@ public class GameScreen extends AbstractScreen {
 
     @Override
     public void dispose() {
+        super.dispose();
         player.dispose();
         level.dispose();
+        backgroundGroup.dispose();
+        winDisplay.dispose();
     }
 }
