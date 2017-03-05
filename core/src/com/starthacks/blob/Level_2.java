@@ -31,7 +31,7 @@ public class Level_2 extends AbstractLevel {
             platformObjects.get(5).setPlatformSize(unitX * 30f, unitY * 10f);
             platformObjects.get(5).setPosition(unitX * 135f, unitY * 100f);
             platformObjects.get(6).setPlatformSize(unitX * 30f, unitY * 10f);
-            platformObjects.get(6).setPosition(unitX * 16 5f, unitY * 100f);
+            platformObjects.get(6).setPosition(unitX * 165f, unitY * 100f);
         }
 
         @Override
