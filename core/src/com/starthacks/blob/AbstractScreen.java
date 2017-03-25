@@ -9,7 +9,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractScreen extends Stage implements Screen {
+public abstract class AbstractScreen extends Stage implements Screen   {
+
+    public AbstractScreen() {
+
+    }
 
     class TouchInfo {
         public float touchX = 0;

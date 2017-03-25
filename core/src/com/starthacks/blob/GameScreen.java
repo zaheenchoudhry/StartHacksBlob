@@ -47,6 +47,10 @@ public class GameScreen extends AbstractScreen {
         this.addActor(player);
     }
 
+    public GameScreen() {
+        super();
+    }
+
     @Override
     public void show() {
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
